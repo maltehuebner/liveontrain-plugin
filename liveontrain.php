@@ -56,18 +56,6 @@ add_action('init', function(): void
     ]);
 });
 
-
-add_action('init', function(): void
-{
-    register_taxonomy( 'city', 'caldera_journey', [
-        'hierarchical' => false,
-        'label' => __('Stadt'),
-        'query_var' => 'city',
-        'rewrite' => ['slug' => 'city']
-    ]);
-});
-
-
 add_filter('the_title', function(string $title = null, $id = null): string
 {
     /** @var WP_Post $post */
