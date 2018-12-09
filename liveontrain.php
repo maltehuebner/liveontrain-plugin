@@ -39,3 +39,24 @@ add_action('pre_get_posts', function(WP_Query $query): WP_Query
 
     return $query;
 });
+
+add_action('init', function(): void
+{
+    register_taxonomy( 'line', 'caldera_journey', [
+        'hierarchical' => false,
+        'label' => __('Linien'),
+        'query_var' => 'line',
+        'rewrite' => ['slug' => 'line']
+    ]);
+});
+
+
+add_action('init', function(): void
+{
+    register_taxonomy( 'city', 'caldera_journey', [
+        'hierarchical' => false,
+        'label' => __('Stadt'),
+        'query_var' => 'city',
+        'rewrite' => ['slug' => 'city']
+    ]);
+});
