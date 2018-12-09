@@ -81,3 +81,49 @@ add_filter('the_title', function(string $title = null, $id = null): string
 
     return $title;
 }, 10, 2 );
+
+add_action('add_meta_boxes', function() {
+    add_meta_box('caldera_journey_meta','Fahrtdetails', function(WP_Post $post): void
+    {
+        wp_nonce_field('caldera_journey_meta','caldera_journey_meta_nonce');
+
+        echo '<p><label for="departure_station">';
+        echo 'Abfahrtsbahnhof';
+        echo '</label>';
+        echo '<br />';
+        echo '<input type="text" id="departure_station" name="departure_station" value="'.get_post_meta($post->ID, 'departure_station', true).'" />';
+        echo '</p>';
+
+        echo '<p><label for="arrival_station">';
+        echo 'Ankunftsbahnhof';
+        echo '</label>';
+        echo '<br />';
+        echo '<input type="text" id="arrival_station" name="arrival_station" value="'.get_post_meta($post->ID, 'arrival_station', true).'" />';
+        echo '</p>';
+
+    },['caldera_journey']);
+});
+
+add_action('save_post', function(int $postId): ?int
+{
+    if ( ! isset( $_POST['caldera_journey_meta_nonce'] ) ) {
+        return $postId;
+    }
+
+    $nonce = $_POST['caldera_journey_meta_nonce'];
+
+    if (!wp_verify_nonce($nonce, 'caldera_journey_meta')) {
+        return $postId;
+    }
+
+    if ('caldera_journey' === $_POST['post_type'] && !current_user_can('edit_post', $postId)) {
+        return $postId;
+    }
+
+    $post = get_post($postId);
+
+    update_post_meta($post->ID, 'departure_station', sanitize_text_field($_POST['departure_station']));
+    update_post_meta($post->ID, 'arrival_station', sanitize_text_field($_POST['arrival_station']));
+
+    return null;
+});
