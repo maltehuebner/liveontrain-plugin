@@ -19,6 +19,13 @@ add_action('init', function(): void
             ],
             'public' => true,
             'has_archive' => true,
+            'supports' => [
+                'title',
+                'editor',
+                'thumbnail',
+                'custom-fields',
+                'revisions',
+            ]
     ]);
 });
 
