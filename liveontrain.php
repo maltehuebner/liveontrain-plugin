@@ -60,3 +60,18 @@ add_action('init', function(): void
         'rewrite' => ['slug' => 'city']
     ]);
 });
+
+
+add_filter('the_title', function(string $title = null, $id = null): string
+{
+    /** @var WP_Post $post */
+    $post = get_post($id);
+
+    if ('caldera_journey' === $post->post_type && !$post->post_title) {
+        $postDateTime = new \DateTime($post->post_date);
+
+        return $postDateTime->format('d.m.Y');
+    }
+
+    return $title;
+}, 10, 2 );
