@@ -75,8 +75,10 @@ add_filter('the_title', function(string $title = null, $id = null): string
 
     if ('caldera_journey' === $post->post_type && !$post->post_title) {
         $postDateTime = new \DateTime($post->post_date);
+        $departureStation = get_post_meta($post->ID, 'departure_station', true);
+        $arrivalStation = get_post_meta($post->ID, 'arrival_station', true);
 
-        return $postDateTime->format('d.m.Y');
+        $title = sprintf('%s: %s–%s', $postDateTime->format('d. F Y'), $departureStation, $arrivalStation);
     }
 
     return $title;
