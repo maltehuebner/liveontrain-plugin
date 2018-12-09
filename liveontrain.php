@@ -23,7 +23,6 @@ add_action('init', function(): void
                 'title',
                 'editor',
                 'thumbnail',
-                'custom-fields',
                 'revisions',
             ]
     ]);
