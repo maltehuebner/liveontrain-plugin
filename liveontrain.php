@@ -9,6 +9,10 @@ Version: 0.1
 Author URI: https://maltehuebner.de/
 */
 
+use Caldera\LiveOnTrainPlugin\Autoloader;
+
+require_once __DIR__.'/Autoloader.php';
+spl_autoload_register([new Autoloader(), 'autoload']);
 
 add_action('init', function(): void
 {
