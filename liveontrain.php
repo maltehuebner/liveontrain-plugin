@@ -10,9 +10,9 @@ Author URI: https://maltehuebner.de/
 */
 
 use Caldera\LiveOnTrainPlugin\Autoloader;
-use Caldera\LiveOnTrainPlugin\PostType\Journey;
+use Caldera\LiveOnTrainPlugin\PostType\JourneyPostType;
 
 require_once __DIR__.'/Autoloader.php';
 spl_autoload_register([new Autoloader(), 'autoload']);
 
-new Journey();
+new JourneyPostType();

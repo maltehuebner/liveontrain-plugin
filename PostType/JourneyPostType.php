@@ -6,7 +6,7 @@ use Caldera\LiveOnTrainPlugin\PostTypeMeta\JourneyMetaInterface;
 use WP_Post;
 use WP_Query;
 
-class Journey
+class JourneyPostType
 {
     protected $postTypeMetas = [];
 
