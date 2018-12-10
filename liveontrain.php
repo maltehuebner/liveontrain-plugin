@@ -16,3 +16,7 @@ require_once __DIR__.'/Autoloader.php';
 spl_autoload_register([new Autoloader(), 'autoload']);
 
 new JourneyPostType();
+
+add_action('widgets_init', function(){
+    register_widget(Caldera\LiveOnTrainPlugin\Widget\TimeLeftWidget::class);
+});
