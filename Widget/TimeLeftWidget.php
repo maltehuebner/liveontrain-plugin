@@ -9,6 +9,7 @@ class TimeLeftWidget extends WP_Widget
     protected $fieldList = [
         'title' => 'Titel',
         'dateTime' => 'Ziel-Zeitpunkt',
+        'text' => 'Text',
     ];
 
     public function __construct()
@@ -35,7 +36,7 @@ class TimeLeftWidget extends WP_Widget
         $diffInterval->format('%a');
         $daysLeft = $diffInterval->format('%a');
 
-        echo sprintf('Noch %d Pendler-Tage von Kiel nach Hamburg.', $daysLeft);
+        echo sprintf($instance['text'], $daysLeft);
 
         echo $args['after_widget'];
     }
@@ -67,5 +68,4 @@ class TimeLeftWidget extends WP_Widget
 
         return $instance;
     }
-
 }
